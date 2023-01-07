@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>playing with variable</title>
+</head>
+<body>
+    <div class="address">
+        <h1>Update CSS Variables with <span>js</span></h1>
+    </div>
+
+
+    <div class="controls">
+        <label for="spacing">Spacing</label>
+        <input id="spacing" name="spacing" type="range" min="10" max="200" value="10" data-value = "px" >
+
+        <label for="blur">Blur</label>
+        <input id="blur" name="blur" type="range" min="0" max="25" value="10" data-value = "px" >
+
+        <label for="color">Base Color</label>
+        <input id="color" type="color" name="color" value="#ffc600">
+    </div>
+
+
+    <img src="./subscribe.jpg" alt="">
+
+    <style>
+        :root{
+            --spacing: 10px;
+            --color: #ffc600;
+            --blur: 10px;
+        }
+        body{
+            background-color:#293c37;
+            display: block;
+            text-align: center;
+            color: white;
+            font-family: sans-serif;
+            font-weight: bold;
+        }
+        .address{
+            font-size: 35px;
+            margin-top: 50px;
+        }
+        .address h1 span{
+            color: var(--color);
+        }
+        .address span{}
+        .controls {
+            font-size: 30px;
+            margin: 70px;
+        }
+        img{
+            padding: var(--spacing);
+            background: var(--color);
+            filter: blur(var(--blur));
+            width: 60%;
+        }
+
+    </style>
+
+
+    <script>
+
+        const inputs = document.querySelectorAll(`.controls input`);
+        console.log(inputs);
+
+        function update(){
+            const suff = this.dataset.value || "" ;
+            document.documentElement.style.setProperty( `--${this.name}`, this.value + suff );
+        }
+
+        inputs.forEach(input => input.addEventListener(`change` , update));
+        inputs.forEach(input => input.addEventListener(`mousemove` , update));
+    
+    </script>
+    
+</body>
+</html>
